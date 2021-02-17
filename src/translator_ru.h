@@ -19,6 +19,7 @@
  * Nickolay Semyonov
  * Andrey V. Stolyarov released Feb 14, 2001
  * Alexandr V. Chelpanov <cav@cryptopro.ru> released Sep 25, 2004
+ * Kirill S. Kirilenko
  * Благодарности: Vitaly A. Repin <vitaly@radio.hop.stu.neva.ru>,
  *    Михаил Глушенков <bbman@mail.ru>
  */
@@ -64,7 +65,7 @@ class TranslatorRussian : public TranslatorAdapter_1_8_15
 
     /*! header that is put before the list of member functions. */
     virtual QCString trMemberFunctionDocumentation()
-    { return "Методы"; }
+    { return "Функции-члены"; }
 
     /*! header that is put before the list of member attributes. */
     virtual QCString trMemberDataDocumentation()
@@ -75,7 +76,7 @@ class TranslatorRussian : public TranslatorAdapter_1_8_15
       }
       else
       {
-        return "Данные класса";
+        return "Данные-члены класса";
       }
     }
 
@@ -94,7 +95,7 @@ class TranslatorRussian : public TranslatorAdapter_1_8_15
     /* Isn't used when optimization for C is on. */
     virtual QCString trMemberList()
     {
-      return "Cписок членов класса";
+      return "Список членов класса";
     }
 
     /*! this is the first part of a sentence that is followed by a class name */
@@ -1315,7 +1316,7 @@ class TranslatorRussian : public TranslatorAdapter_1_8_15
     /*! Header used for the documentation section of a class' events. */
     virtual QCString trEventDocumentation()
     {
-      return "Cобытия";
+      return "События";
     }
 
 //////////////////////////////////////////////////////////////////////////
@@ -1964,6 +1965,159 @@ class TranslatorRussian : public TranslatorAdapter_1_8_15
       if (single) result+="а:"; else result+="ов:";
       return result;
     }
+
+///////////////////////////////////////////////////////////////////////
+// new since 1.8.15
+///////////////////////////////////////////////////////////////////////
+
+    /* Slice */
+    virtual QCString trConstants()
+    {
+      return "Константы";
+    }
+    virtual QCString trConstantDocumentation()
+    {
+      return "Константы";
+    }
+    virtual QCString trSequences()
+    {
+      return "Последовательности";
+    }
+    virtual QCString trSequenceDocumentation()
+    {
+      return "Последовательности";
+    }
+    virtual QCString trDictionaries()
+    {
+      return "Словари";
+    }
+    virtual QCString trDictionaryDocumentation()
+    {
+      return "Словари";
+    }
+    virtual QCString trSliceInterfaces()
+    {
+      return "Интерфейсы";
+    }
+    virtual QCString trInterfaceIndex()
+    {
+      return "Указатель интерфейсов";
+    }
+    virtual QCString trInterfaceList()
+    {
+      return "Интерфейсы";
+    }
+    virtual QCString trInterfaceListDescription()
+    {
+      return "Интерфейсы с их кратким описанием:";
+    }
+    virtual QCString trInterfaceHierarchy()
+    {
+      return "Иерархия интерфейсов";
+    }
+    virtual QCString trInterfaceHierarchyDescription()
+    {
+      return "Этот список наследования отсортирован не полностью, в алфавитном порядке:";
+    }
+    virtual QCString trInterfaceDocumentation()
+    {
+      return "Интерфейсы";
+    }
+    virtual QCString trStructs()
+    {
+      return "Структуры";
+    }
+    virtual QCString trStructIndex()
+    {
+      return "Указатель структур";
+    }
+    virtual QCString trStructList()
+    {
+      return "Список структур";
+    }
+    virtual QCString trStructListDescription()
+    {
+      return "Структуры с их кратким описанием:";
+    }
+    virtual QCString trStructDocumentation()
+    {
+      return "Структуры";
+    }
+    virtual QCString trExceptionIndex()
+    {
+      return "Указатель исключений";
+    }
+    virtual QCString trExceptionList()
+    {
+      return "Список исключений";
+    }
+    virtual QCString trExceptionListDescription()
+    {
+      return "Исключения с их кратким описанием:";
+    }
+    virtual QCString trExceptionHierarchy()
+    {
+      return "Иерархия исключений";
+    }
+    virtual QCString trExceptionHierarchyDescription()
+    {
+      return "Этот список наследования отсортирован не полностью, в алфавитном порядке:";
+    }
+    virtual QCString trExceptionDocumentation()
+    {
+      return "Исключения";
+    }
+    virtual QCString trCompoundReferenceSlice(const char *clName, ClassDef::CompoundType compType, bool isLocal)
+    {
+      QCString result;
+      if (isLocal)
+      {
+        switch(compType)
+        {
+        case ClassDef::Class:      result+="Локальный класс "; break;
+        case ClassDef::Struct:     result+="Локальная структура "; break;
+        case ClassDef::Union:      result+="Локальное объединение "; break;
+        case ClassDef::Interface:  result+="Локальный интерфейс "; break;
+        case ClassDef::Protocol:   result+="Локальный протокол "; break;
+        case ClassDef::Category:   result+="Локальная категория "; break;
+        case ClassDef::Exception:  result+="Локальоне исключение "; break;
+        default: break;
+        }
+      }
+      else
+      {
+        switch(compType)
+        {
+        case ClassDef::Class:      result+="Класс "; break;
+        case ClassDef::Struct:     result+="Структура "; break;
+        case ClassDef::Union:      result+="Объединение "; break;
+        case ClassDef::Interface:  result+="Интерфейс "; break;
+        case ClassDef::Protocol:   result+="Протокол "; break;
+        case ClassDef::Category:   result+="Категория "; break;
+        case ClassDef::Exception:  result+="Исключение "; break;
+        default: break;
+        }
+      }
+      result+=(QCString)clName;
+      return result;
+    }
+    virtual QCString trOperations()
+    {
+      return "Операции";
+    }
+    virtual QCString trOperationDocumentation()
+    {
+      return "Операции";
+    }
+    virtual QCString trDataMembers()
+    {
+      return "Члены данных";
+    }
+    virtual QCString trDataMemberDocumentation()
+    {
+      return "Члены данных";
+    }
+
 };
 
 #endif
